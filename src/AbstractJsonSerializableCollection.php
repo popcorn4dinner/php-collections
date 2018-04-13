@@ -1,7 +1,6 @@
 <?php
 
-namespace StepStone\SeedCommons\Collection;
-
+namespace Popcorn4dinner\Collection;
 
 abstract class AbstractJsonSerializableCollection extends AbstractPaginatedCollection implements \JsonSerializable
 {
@@ -16,7 +15,7 @@ abstract class AbstractJsonSerializableCollection extends AbstractPaginatedColle
      */
     public function __construct(array $items, int $offset, int $limit, int $totalAmount)
     {
-        parent::__construct($items,  $offset,  $limit,  $totalAmount);
+        parent::__construct($items, $offset, $limit, $totalAmount);
     }
 
     public function jsonSerialize()
@@ -43,5 +42,4 @@ abstract class AbstractJsonSerializableCollection extends AbstractPaginatedColle
 
 
     abstract protected static function serializeItem($item): array;
-
 }

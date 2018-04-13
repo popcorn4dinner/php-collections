@@ -1,6 +1,6 @@
 <?php
 
-namespace StepStone\SeedCommons\Collection;
+namespace Popcorn4dinner\Collection;
 
 abstract class AbstractPaginatedCollection extends AbstractCollection
 {
@@ -39,12 +39,13 @@ abstract class AbstractPaginatedCollection extends AbstractCollection
         $this->limit = $limit;
         $this->offset = $offset;
         $this->totalAmount = $totalAmount;
-
     }
 
     public static function fromResponseBody(array $responseBody, callable $populateItem)
     {
-        $items = array_map(function($i) use($populateItem){ return $populateItem($i);}, $responseBody[static::ITEMS]);
+        $items = array_map(function ($i) use ($populateItem) {
+            return $populateItem($i);
+        }, $responseBody[static::ITEMS]);
 
         return new static($items, $responseBody[static::OFFSET], $responseBody[static::LIMIT], $responseBody[static::TOTAL_AMOUNT]);
     }
@@ -99,7 +100,7 @@ abstract class AbstractPaginatedCollection extends AbstractCollection
 
     public function getAmountPages(): int
     {
-        return (int)ceil($this->totalAmount / $this->getPageSize() );
+        return (int)ceil($this->totalAmount / $this->getPageSize());
     }
 
     public function getCurrentPage(): int
@@ -111,6 +112,4 @@ abstract class AbstractPaginatedCollection extends AbstractCollection
     {
         return new static($this->items, $this->offset, $this->limit, $this->totalAmount);
     }
-
 }
-

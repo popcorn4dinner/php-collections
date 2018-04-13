@@ -1,7 +1,6 @@
 <?php
 
-namespace StepStone\SeedCommons\Collection;
-
+namespace Popcorn4dinner\Collection;
 
 abstract class AbstractCollection implements \Iterator, \Countable
 {
@@ -17,11 +16,11 @@ abstract class AbstractCollection implements \Iterator, \Countable
 
     public function add($item)
     {
-        if($this->isCollectableInstance($item)){
+        if ($this->isCollectableInstance($item)) {
             $this->store($item);
 
             return $this;
-        }else{
+        } else {
             $this->throwNotCollectableExceptionFor($item);
         }
     }
@@ -74,7 +73,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
 
     public function each(callable $functionToApply): AbstractCollection
     {
-        foreach ($this->items as $item){
+        foreach ($this->items as $item) {
             $functionToApply($item);
         }
 
@@ -101,7 +100,6 @@ abstract class AbstractCollection implements \Iterator, \Countable
     {
         $processedItems = [];
         foreach ($this->items as $item) {
-
             if ($shouldMatch($item)) {
                 $processedItems[] = $item;
             }
@@ -126,21 +124,23 @@ abstract class AbstractCollection implements \Iterator, \Countable
     {
         $collection = new $collectionClass();
 
-        if(is_a($collection, AbstractCollection::class)){
-            $convertedItems = array_map(function($i)use ($itemClass){ return new $itemClass($i);} ,$this->items);
+        if (is_a($collection, AbstractCollection::class)) {
+            $convertedItems = array_map(function ($i) use ($itemClass) {
+                return new $itemClass($i);
+            }, $this->items);
 
-            foreach ($convertedItems as $item){
+            foreach ($convertedItems as $item) {
                 $collection->add($item);
             }
 
             return $collection;
-        }else{
+        } else {
             throw new \InvalidArgumentException("Given collections class is not compatible with AbstractColletion.");
         }
-
     }
 
-    private function throwNotCollectableExceptionFor($item){
+    private function throwNotCollectableExceptionFor($item)
+    {
         throw new \InvalidArgumentException("Invalid Item: ". __CLASS__ ." cannot collect items that like ". get_class($item));
     }
 
@@ -154,10 +154,10 @@ abstract class AbstractCollection implements \Iterator, \Countable
     {
         $splittedItems = [];
 
-        foreach ($this->items as $item){
+        foreach ($this->items as $item) {
             $key = $split($item);
 
-            if(!isset($splittedItems[$key])){
+            if (!isset($splittedItems[$key])) {
                 $splittedItems[$key] = [];
             }
 
@@ -165,7 +165,9 @@ abstract class AbstractCollection implements \Iterator, \Countable
         }
 
         return array_map(
-            function($items){ return $this->createCloneOfThis()->setItems($items); },
+            function ($items) {
+                return $this->createCloneOfThis()->setItems($items);
+            },
             $splittedItems
         );
     }
@@ -190,7 +192,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
         return new static(...array_values($this->items));
     }
 
-    protected abstract function isCollectableInstance($item): bool;
+    abstract protected function isCollectableInstance($item): bool;
 
     protected function store($item)
     {
