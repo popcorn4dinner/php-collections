@@ -21,7 +21,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Popcorn4dinner\\Collection": "src/"
+      "Popcorn4dinner\\Collection\\": "src/"
     }
   },
     "autoload-dev": {
