@@ -11,7 +11,7 @@ A flexible, simple to use and non-opinionated collection library.
 ** Creating a collection
 Minimal Usage:
 #+BEGIN_SRC php
-use StepStone\SeedCommons\Collection\AbstractCollection;
+use Popcorn4dinner\Collection\AbstractCollection;
 
 class MyCollection extends AbstractCollection
 { 
@@ -39,7 +39,7 @@ class MyCollection extends AbstractCollection
 #+END_SRC
 **  Controlling storage mechanics
 #+BEGIN_SRC php
-use StepStone\SeedCommons\Collection\AbstractCollection;
+use Popcorn4dinner\Collection\AbstractCollection;
 
 class MyCollection extends AbstractCollection
 {
@@ -61,7 +61,7 @@ class MyCollection extends AbstractCollection
 Paginated Collections can be used so enable pagination for API Endpoints and Views.
 
 #+BEGIN_SRC php
-use StepStone\SeedCommons\Collection\AbstractPaginatedCollection;
+use Popcorn4dinner\Collection\AbstractPaginatedCollection;
   
 class ExampleCollection extends AbstractPaginatedCollection
 {
@@ -93,13 +93,13 @@ $collection->getCurrentPage()
 $collection->hasPreviousPage()
 // true
   
-$collection->HasNextPage()
+$collection->hasNextPage()
 // true
 #+END_SRC
 
 *** Paginated REST endpoints
 #+BEGIN_SRC php
-use StepStone\SeedCommons\Collection\AbstractJsonSerializableCollection;
+use Popcorn4dinner\Collection\AbstractJsonSerializableCollection;
   
 class ExampleJsonSerializableCollection extends AbstractJsonSerializableCollection
 {
@@ -241,4 +241,8 @@ Returns an Array with all items in the collection.
 #+BEGIN_SRC php
 SomeArrayFunction( $collection->toArray() );
 #+END_SRC
+
+
+** License
+MIT
 
