@@ -1,0 +1,36 @@
+{
+    "name": "stepstone/seed-commons",
+    "description": "Commonly used utility classes and domain models",
+    "type": "library",
+    "minimum-stability": "stable",
+    "config": {
+        "secure-http": false
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://composer.stepstone.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "stepstone/service-skeleton-php-common": ">=6",
+        "esky/enum": "^1.1"
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6",
+        "fzaninotto/faker": "^1.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "StepStone\\SeedCommons\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "StepStone\\SeedCommons\\Examples\\": "examples/",
+            "StepStone\\SeedCommons\\Tests\\": "tests/unit/"
+        }
+    }
+}

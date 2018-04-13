@@ -1,0 +1,238 @@
+* PHP Collection
+A flexible, simple to use and non-opinionated collection library.
+
+** Creating a collection
+Minimal Usage:
+#+BEGIN_SRC php
+use StepStone\SeedCommons\Collection\AbstractCollection;
+
+class MyCollection extends AbstractCollection
+{ 
+   
+ protected function isCollectableInstance($item): bool
+     {
+        // This is the place where you can inforce typing,
+        // but also any other convention that all items in your collection 
+        // have to follow.
+        
+         return true;
+     }
+}
+#+END_SRC
+
+#+BEGIN_SRC php
+ $item1 = new ExampleItem();
+ $item2 = new ExampleItem();
+ 
+ $collection = new MyCollection($item1, $item2); 
+ 
+ foreach($collection as $item){
+    //  Your logic goes here...
+ }
+#+END_SRC
+
+**  Controlling storage mechanics
+#+BEGIN_SRC php
+use StepStone\SeedCommons\Collection\AbstractCollection;
+
+class MyCollection extends AbstractCollection
+{
+
+ // Now users are stored uniquly by their email address
+ protected function store($user)
+ {
+     $this->items[$user->email] = $user;
+ }     
+  
+ protected function isCollectableInstance($user): bool
+ {
+     return $user->email !== null;
+ }
+}
+#+END_SRC
+
+** Pagination and REST API endpoints
+Paginated Collections can be used so enable pagination for API Endpoints and Views.
+
+#+BEGIN_SRC php
+use StepStone\SeedCommons\Collection\AbstractPaginatedCollection;
+  
+class ExampleCollection extends AbstractPaginatedCollection
+{
+
+    protected function isCollectableInstance($item): bool
+    {
+        return is_a($item, ExampleItem::class);
+    }
+    
+}
+#+END_SRC
+
+#+BEGIN_SRC php
+$offset = 10;
+$limit = 20;
+$totalAmountOfItems = 25;
+  
+$collection = new ExampleCollection($items, $offset, $limit, $totalAmountOfItems);
+  
+$collection->getPageSize()
+// 10
+  
+$collections->getAmountPages()
+// 3
+  
+$collection->getCurrentPage()
+// 2
+  
+$collection->hasPreviousPage()
+// true
+  
+$collection->HasNextPage()
+// true
+#+END_SRC
+
+*** Paginated REST endpoints
+#+BEGIN_SRC php
+use StepStone\SeedCommons\Collection\AbstractJsonSerializableCollection;
+  
+class ExampleJsonSerializableCollection extends AbstractJsonSerializableCollection
+{
+    protected function isCollectableInstance($item): bool
+    {
+        return is_a($item, ExampleItem::class);
+    }
+  
+    protected static function serializeItem($item): array
+    {
+        return [ 'name' => $item->name];
+    }
+      
+}
+#+END_SRC
+
+#+BEGIN_SRC php
+$collection->jsonSerialize();
+
+/*
+ * [
+ *   "items" => 
+ *      [
+ *        [ "name" => "Some name"],
+ *        ...  
+ *      ],
+ *   "_total" => 25,
+ *   "_offset" => 10,
+ *   "_limit" => 20,
+ *   "_page_size" => 10,
+ *   "_current_page" => 2,
+ *   "_amount_pages" => 3,
+ *   "_has_next_page" => true,
+ *   "_has_previous_page" => true
+ * ]
+ */
+#+END_SRC
+
+*** Create collections from a request body
+#+BEGIN_SRC php
+$users = PaginatedUserCollection::fromRequestBody($requestBody, 
+    function($userDataRow){
+        return new User($userDataRow['name']);
+    }
+);
+#+END_SRC
+
+** Utility functions
+
+*** each
+Applies the callback to all items within the collection.
+#+BEGIN_SRC php
+$users->each(
+    function($user) { return $user->lock(); }
+);
+#+END_SRC
+
+*** map
+Applies the callback to all items within the collection and returns a new collection.
+#+BEGIN_SRC php
+$lockedUsers = $users->map(
+    function($user) { return $user->lock(); }
+);
+#+END_SRC
+
+*** first
+Returns the first item in the collection
+#+BEGIN_SRC php
+$bird = $birds->first();
+#+END_SRC
+
+*** last
+Returns the last item in the collection
+#+BEGIN_SRC php
+$bird = $birds->last();
+#+END_SRC
+
+*** get
+Return and item by key
+#+BEGIN_SRC php
+$bird = $birds->get(3);
+
+$user = $user->get("someone@example.com");
+#+END_SRC
+
+*** filter
+Returns a new collection based on the filter callback
+#+BEGIN_SRC php
+$productsAddedToday = $products->filter(
+    function($product) { return $product->createdAt() > new \DateTime('today'); }
+);
+#+END_SRC
+
+*** reject
+Reverse effect of filter(). Return a new collection based on the filter callback
+#+BEGIN_SRC php
+$delayedTrains = $trains->reject(
+    function($tain) { return $train->isOnTime(); }
+);
+#+END_SRC
+
+*** sort
+Sorts the collection based on a callback
+#+BEGIN_SRC php
+$purchases->sort(
+    function($a, $b){ return $a->createdAt > $b->createdAt; }
+);
+#+END_SRC
+
+*** unique
+Return a new Collection with unique items.
+#+BEGIN_SRC php
+$uniqueVisits = $visits->unique();
+#+END_SRC
+
+*** split
+Maybe my personal favorite: Returns an array of collections, split based on the given callback.
+#+BEGIN_SRC php
+$purchasesByDay = $purchases->split(
+    functions($purchase){ return $purchase->createdAt->format('Y-m-d'); }
+);
+  
+// returns:
+// [
+//    '2017-08-01' => PurchaseCollection...
+
+#+END_SRC
+
+*** reduce
+Returns an array of transformed items.
+#+BEGIN_SRC php
+$userIds = $users->reduce(
+    function($user){ $user->id }
+);
+#+END_SRC
+
+*** toArray
+Returns an Array with all items in the collection.
+#+BEGIN_SRC php
+SomeArrayFunction( $collection->toArray() );
+#+END_SRC
+

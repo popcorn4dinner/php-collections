@@ -1,0 +1,9 @@
+.idea/
+vendor/
+node_modules/*
+node_modules
+public/assets/*
+bower_components
+bower_components/*
+
+tests/_output/*
