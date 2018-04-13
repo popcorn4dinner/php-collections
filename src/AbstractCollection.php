@@ -187,6 +187,11 @@ abstract class AbstractCollection implements \Iterator, \Countable
         return array_values(array_slice($this->items, -1))[0] ?? null;
     }
 
+    public function get($key)
+    {
+        return $this->items[$key] ?? null;
+    }
+
     protected function createCloneOfThis()
     {
         return new static(...array_values($this->items));
