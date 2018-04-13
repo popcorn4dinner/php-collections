@@ -2,7 +2,7 @@
 
 namespace Popcorn4dinner\Collection\Examples;
 
-use StepStone\SeedCommons\Collection\AbstractCollection;
+use Popcorn4dinner\Collection\AbstractCollection;
 
 class ExampleCollection extends AbstractCollection
 {

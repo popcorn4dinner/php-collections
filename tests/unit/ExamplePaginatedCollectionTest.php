@@ -1,6 +1,6 @@
 <?php
 
-namespace StepStone\SeedCommons\Tests;
+namespace Popcorn4dinner\Collection\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Popcorn4dinner\Collection\Examples\ExampleItem;

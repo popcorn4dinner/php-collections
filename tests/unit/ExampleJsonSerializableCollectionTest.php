@@ -1,11 +1,11 @@
 <?php
 
-namespace StepStone\SeedCommons\Tests;
+namespace Popcorn4dinner\Collection\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-usePopcorn4dinner\Collection\Examples\ExampleItem;
-usePopcorn4dinner\Collection\Examples\ExampleJsonSerializableCollection;
+use Popcorn4dinner\Collection\Examples\ExampleItem;
+use Popcorn4dinner\Collection\Examples\ExampleJsonSerializableCollection;
 
 class ExampleJsonSerializableCollectionTest extends ExamplePaginatedCollectionTest
 {
