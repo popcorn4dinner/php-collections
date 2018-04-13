@@ -1,9 +1,8 @@
 <?php
 
-namespace StepStone\SeedCommons\Examples\Collection;
+namespace Popcorn4dinner\Collection\Examples;
 
-
-use StepStone\SeedCommons\Collection\AbstractPaginatedCollection;
+use Popcorn4dinner\Collection\AbstractPaginatedCollection;
 
 class ExamplePaginatedCollection extends AbstractPaginatedCollection
 {
@@ -12,5 +11,4 @@ class ExamplePaginatedCollection extends AbstractPaginatedCollection
     {
         return is_a($item, ExampleItem::class);
     }
-
 }

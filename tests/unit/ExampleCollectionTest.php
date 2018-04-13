@@ -1,12 +1,10 @@
 <?php
 
-namespace StepStone\SeedCommons\Tests\Collection;
-
-
+namespace StepStone\SeedCommons\Tests;
 
 use PHPUnit\Framework\TestCase;
-use StepStone\SeedCommons\Examples\Collection\ExampleCollection;
-use StepStone\SeedCommons\Examples\Collection\ExampleItem;
+use Popcorn4dinner\Collection\Examples\ExampleCollection;
+use Popcorn4dinner\Collection\Examples\ExampleItem;
 
 class ExampleCollectionTest extends TestCase
 {
@@ -69,17 +67,19 @@ class ExampleCollectionTest extends TestCase
      * REJECT *
      **********/
 
-    function test_that_reject_reduces_the_offers_in_collection(){
+    function test_that_reject_reduces_the_offers_in_collection()
+    {
 
-        $result = $this->collection->reject(function($item){
+        $result = $this->collection->reject(function ($item) {
             return $item->name === 'Hans';
         });
 
         $this->assertEquals(1, count($result));
     }
 
-    function test_that_reject_does_not_reduce_the_offers_in_collection(){
-        $result = $this->collection->reject(function(){
+    function test_that_reject_does_not_reduce_the_offers_in_collection()
+    {
+        $result = $this->collection->reject(function () {
             return false;
         });
 
@@ -92,7 +92,9 @@ class ExampleCollectionTest extends TestCase
     {
         $this->assertInstanceOf(
             ExampleCollection::class,
-            $this->collection->reject(function(){return true;})
+            $this->collection->reject(function () {
+                return true;
+            })
         );
     }
 
@@ -100,16 +102,18 @@ class ExampleCollectionTest extends TestCase
      * FILTER *
      **********/
 
-    function test_that_filter_reduces_the_offers_in_collection(){
-        $result = $this->collection->filter(function($item){
+    function test_that_filter_reduces_the_offers_in_collection()
+    {
+        $result = $this->collection->filter(function ($item) {
             return $item->name === 'Hans';
         });
 
-        $this->assertEquals(1 , count($result));
+        $this->assertEquals(1, count($result));
     }
 
-    function test_that_filter_does_not_reduce_the_offers_in_collection(){
-        $result = $this->collection->filter(function(){
+    function test_that_filter_does_not_reduce_the_offers_in_collection()
+    {
+        $result = $this->collection->filter(function () {
             return false;
         });
 
@@ -122,7 +126,9 @@ class ExampleCollectionTest extends TestCase
     {
         $this->assertInstanceOf(
             ExampleCollection::class,
-            $this->collection->filter(function(){return true;})
+            $this->collection->filter(function () {
+                return true;
+            })
         );
     }
 
@@ -132,7 +138,7 @@ class ExampleCollectionTest extends TestCase
 
     function test_count_counts()
     {
-        $this->assertEquals($this->collection->count(),count($this->collection));
+        $this->assertEquals($this->collection->count(), count($this->collection));
     }
 
     /***********
@@ -209,8 +215,7 @@ class ExampleCollectionTest extends TestCase
     function test_each_calls_the_callback_on_all_items()
     {
         $publishingLanguages = [];
-        $this->collection->each(function($item) use (&$publishingLanguages)
-        {
+        $this->collection->each(function ($item) use (&$publishingLanguages) {
             $publishingLanguages[]= $item->name;
         });
 
@@ -223,15 +228,14 @@ class ExampleCollectionTest extends TestCase
      ********/
     function test_split_returnsTheRightAmountOfCollections()
     {
-        $result = $this->collection->split(function($item)
-        {
+        $result = $this->collection->split(function ($item) {
             return $item->name;
         });
 
         $this->assertInternalType('array', $result);
         $this->assertCount(2, $result);
 
-        foreach ($result as $collection){
+        foreach ($result as $collection) {
             $this->assertInstanceOf(ExampleCollection::class, $collection);
             $this->assertCount(1, $collection);
         }

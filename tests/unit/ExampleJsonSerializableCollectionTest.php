@@ -1,11 +1,11 @@
 <?php
 
-namespace StepStone\SeedCommons\Tests\Collection;
-
+namespace StepStone\SeedCommons\Tests;
 
 use PHPUnit\Framework\TestCase;
-use StepStone\SeedCommons\Examples\Collection\ExampleItem;
-use StepStone\SeedCommons\Examples\Collection\ExampleJsonSerializableCollection;
+
+usePopcorn4dinner\Collection\Examples\ExampleItem;
+usePopcorn4dinner\Collection\Examples\ExampleJsonSerializableCollection;
 
 class ExampleJsonSerializableCollectionTest extends ExamplePaginatedCollectionTest
 {
@@ -23,7 +23,6 @@ class ExampleJsonSerializableCollectionTest extends ExamplePaginatedCollectionTe
             new ExampleItem('Thomas'),
             new ExampleItem('Helga')
         ];
-
     }
 
     function test_fromResponse_returnsACorrectCollection()
@@ -31,8 +30,10 @@ class ExampleJsonSerializableCollectionTest extends ExamplePaginatedCollectionTe
         $original = new ExampleJsonSerializableCollection($this->items, 0, 10, 61);
         $result = ExampleJsonSerializableCollection::fromResponseBody(
             $original->jsonSerialize(),
-            function($i){ return new ExampleItem($i['name']);}
-            );
+            function ($i) {
+                return new ExampleItem($i['name']);
+            }
+        );
 
         $this->assertEquals($original, $result);
         $this->assertEquals($original->getCurrentPage(), $result->getCurrentPage());
@@ -41,7 +42,8 @@ class ExampleJsonSerializableCollectionTest extends ExamplePaginatedCollectionTe
         $this->assertEquals($original->getTotalAmount(), $result->getTotalAmount());
     }
 
-    function test_jasonSerialize_returns_allMetaData(){
+    function test_jasonSerialize_returns_allMetaData()
+    {
         $collection = new ExampleJsonSerializableCollection($this->items, 10, 5, 61);
 
         $expecredMetaData = [
@@ -57,14 +59,14 @@ class ExampleJsonSerializableCollectionTest extends ExamplePaginatedCollectionTe
 
         $result = $collection->jsonSerialize();
 
-        foreach ($expecredMetaData as $key => $value)
-        {
+        foreach ($expecredMetaData as $key => $value) {
             $this->assertTrue(isset($result[$key]), "Expected result to include key {$key}");
-            $this->assertEquals($value,$result[$key], "Expected meta info {$key} to be '{$value}' but was '{$result[$key]}'");
+            $this->assertEquals($value, $result[$key], "Expected meta info {$key} to be '{$value}' but was '{$result[$key]}'");
         }
     }
 
-    function test_jasonSerialize_returns_allSerializedItems(){
+    function test_jasonSerialize_returns_allSerializedItems()
+    {
         $collection = new ExampleJsonSerializableCollection($this->items, 10, 5, 61);
 
         $result = $collection->jsonSerialize();

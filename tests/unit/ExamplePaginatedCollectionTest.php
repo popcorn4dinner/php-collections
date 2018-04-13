@@ -1,10 +1,10 @@
 <?php
 
-namespace StepStone\SeedCommons\Tests\Collection;
+namespace StepStone\SeedCommons\Tests;
 
 use PHPUnit\Framework\TestCase;
-use StepStone\SeedCommons\Examples\Collection\ExampleItem;
-use StepStone\SeedCommons\Examples\Collection\ExamplePaginatedCollection;
+use Popcorn4dinner\Collection\Examples\ExampleItem;
+use Popcorn4dinner\Collection\Examples\ExamplePaginatedCollection;
 
 class ExamplePaginatedCollectionTest extends ExampleCollectionTest
 {
@@ -19,7 +19,6 @@ class ExamplePaginatedCollectionTest extends ExampleCollectionTest
             new ExampleItem('Hans'),
             new ExampleItem('Helga')
         ];
-
     }
 
     function test_fromResponse_returnsACorrectCollection()
@@ -34,7 +33,9 @@ class ExamplePaginatedCollectionTest extends ExampleCollectionTest
             ExamplePaginatedCollection::OFFSET => 0,
             ExamplePaginatedCollection::LIMIT => 10,
             ExamplePaginatedCollection::TOTAL_AMOUNT => 61
-        ], function($i){ return new ExampleItem($i['name']);});
+        ], function ($i) {
+            return new ExampleItem($i['name']);
+        });
 
         $this->assertEquals($original, $result);
         $this->assertEquals($original->getCurrentPage(), $result->getCurrentPage());
@@ -56,7 +57,6 @@ class ExamplePaginatedCollectionTest extends ExampleCollectionTest
     {
         $collection = new ExamplePaginatedCollection($this->items, 55, 10, 61);
         $this->assertFalse($collection->hasNextPage());
-
     }
 
     function test_hasPreviousPage_returnsTrue_ifMorePagesExist()
@@ -95,7 +95,6 @@ class ExamplePaginatedCollectionTest extends ExampleCollectionTest
 
         $result = new ExamplePaginatedCollection($this->items, 0, 5, 61);
         $this->assertEquals(13, $result->getAmountPages());
-
     }
 
     function test_get_AmountPages_returnsTheRightAmountOfPages_withLimitHigherThenTotalAmount()
@@ -115,6 +114,4 @@ class ExamplePaginatedCollectionTest extends ExampleCollectionTest
         $result = new ExamplePaginatedCollection($this->items, 0, 1, 61);
         $this->assertEquals(61, $result->getAmountPages());
     }
-
-
 }

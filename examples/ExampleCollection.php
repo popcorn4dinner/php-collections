@@ -1,6 +1,6 @@
 <?php
 
-namespace StepStone\SeedCommons\Examples\Collection;
+namespace Popcorn4dinner\Collection\Examples;
 
 use StepStone\SeedCommons\Collection\AbstractCollection;
 
@@ -10,5 +10,4 @@ class ExampleCollection extends AbstractCollection
     {
         return is_a($item, ExampleItem::class);
     }
-
 }

@@ -1,9 +1,8 @@
 <?php
 
-namespace StepStone\SeedCommons\Examples\Collection;
+namespace Popcorn4dinner\Collection\Examples;
 
-
-use StepStone\SeedCommons\Collection\AbstractJsonSerializableCollection;
+use Popcorn4dinner\Collection\AbstractJsonSerializableCollection;
 
 class ExampleJsonSerializableCollection extends AbstractJsonSerializableCollection
 {
@@ -16,5 +15,4 @@ class ExampleJsonSerializableCollection extends AbstractJsonSerializableCollecti
     {
         return [ 'name' => $item->name];
     }
-
 }

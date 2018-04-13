@@ -1,8 +1,8 @@
 <?php
 
-namespace StepStone\SeedCommons\Examples\Collection;
+namespace Popcorn4dinner\Collection\Examples;
 
-use StepStone\SeedCommons\Collection\AbstractCollection;
+use Popcorn4dinner\Collection\AbstractCollection;
 
 class CustomStorageCollection extends AbstractCollection
 {
@@ -15,5 +15,4 @@ class CustomStorageCollection extends AbstractCollection
     {
         $this->items[$item->name] = $item;
     }
-
 }

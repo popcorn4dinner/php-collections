@@ -1,7 +1,6 @@
 <?php
 
-namespace StepStone\SeedCommons\Examples\Collection;
-
+namespace Popcorn4dinner\Collection\Examples;
 
 class ExampleItem
 {
@@ -15,6 +14,4 @@ class ExampleItem
     {
         $this->name = $name;
     }
-
-
 }
