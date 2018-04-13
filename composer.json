@@ -2,6 +2,7 @@
   "name": "popcorn4dinner/collections",
   "description": "A flexible, simple to use and non-opinionated collection library",
   "type": "library",
+  "version": "0.1.0",
   "minimum-stability": "stable",
   "config": {
     "preferred-install": "dist"
