@@ -283,4 +283,22 @@ class ExampleCollectionTest extends TestCase
         $result = $this->collection->last();
         $this->assertEquals($this->items[1], $result, "should always return the same item");
     }
+
+    /********
+     * get *
+     ********/
+
+    function test_get_returns_theCorrectItemIfFound()
+    {
+        $result = $this->collection->get(1);
+
+        $this->assertEquals($this->items[1], $result);
+    }
+
+    function test_get_returns_theNullIfNotFound()
+    {
+        $result = $this->collection->get(1);
+
+        $this->assertNull($this->items[3]);
+    }
 }
