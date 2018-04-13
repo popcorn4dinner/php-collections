@@ -1,9 +1,13 @@
-.idea/
-vendor/
-node_modules/*
-node_modules
-public/assets/*
-bower_components
-bower_components/*
+# IDEs
+.#*
+.idea
+.iml
 
+# OSX
+.DS_Store
+
+#artifacts
 tests/_output/*
+tmp
+vendor/
+node_modules
