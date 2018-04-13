@@ -1,6 +1,13 @@
 * PHP Collection
 A flexible, simple to use and non-opinionated collection library.
 
+** Features
++ minimalistic and easily comprehendable
++ supports pagiantion
++ supports json serialization
++ a bunch of util functions to make your live easier
++ designed for extensibility 
+
 ** Creating a collection
 Minimal Usage:
 #+BEGIN_SRC php
@@ -30,7 +37,6 @@ class MyCollection extends AbstractCollection
     //  Your logic goes here...
  }
 #+END_SRC
-
 **  Controlling storage mechanics
 #+BEGIN_SRC php
 use StepStone\SeedCommons\Collection\AbstractCollection;
