@@ -297,8 +297,6 @@ class ExampleCollectionTest extends TestCase
 
     function test_get_returns_theNullIfNotFound()
     {
-        $result = $this->collection->get(1);
-
-        $this->assertNull($this->items[3]);
+        $this->assertNull($this->collection->get(3));
     }
 }
