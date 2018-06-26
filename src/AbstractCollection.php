@@ -141,7 +141,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
 
     private function throwNotCollectableExceptionFor($item)
     {
-        throw new \InvalidArgumentException("Invalid Item: ". __CLASS__ ." cannot collect items that like ". get_class($item));
+        throw new \InvalidArgumentException("Invalid Item: ". __CLASS__ ." cannot collect items like ". get_class($item));
     }
 
     public function sort(callable $sort): AbstractCollection
